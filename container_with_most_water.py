@@ -8,7 +8,7 @@ Return the maximum amount of water a container can store.
 """
 
 while True:
-    heights = [1,8,6,2,5,4,8,3,7]
+    heights = []
     while True:
         num = input("Enter Num (Q to stop): ")
         try:
@@ -19,20 +19,33 @@ while True:
                 break
             else:
                 print("Not an Int")
+    max_area = 0
+    for h1 in range(len(heights)):
+        for h2 in range(len(heights)):
+            if heights[h1] > heights[h2]:
+                lowest_point = heights[h2]
+                highest_index = h1 +1
+                lowest_index = h2 +1
+            if heights[h1] < heights[h2]:
+                lowest_point = heights[h1]
+                highest_index = h2 +1
+                lowest_index = h1 +1
+            if heights[h1] == heights[h2]:
+                lowest_point = heights[h1]
+                highest_index = h2 +1
+                lowest_index = h1 +1
 
-    highest_num = 0
-    for i in heights:
-        if i > highest_num:
-            highest_num = i
-    point1 = [highest_num, heights.index(highest_num)+1]
-    
-    heights.remove(highest_num)
+            index_range = abs(highest_index - lowest_index)
 
-    print(heights)
-    highest_num = 0
-    for i in heights:
-        if i > highest_num:
-            highest_num = i
-    point2 = [highest_num, heights.index(highest_num)+2]
-    print(point1)
-    print(point2)
+            area = lowest_point * index_range
+            if  area > max_area:
+                max_area = area
+                max_lowest_point = lowest_point
+                max_highest_index = highest_index
+                max_lowest_index = lowest_index
+                max_index_range = index_range
+    print(max_area)
+
+            
+            
+            
